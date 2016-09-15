@@ -5,7 +5,7 @@
  oauth2-server | oauth2 服务器+资源
  oauth2-client | oauth2 客户端
  oauth2-mgr    | oauth2 管理后台
- oauth2-httpclient | oauth2 客户端
+ oauth2-httpclient | oauth2 http客户端
 
 ##快速运行
     1.修改3个工程下的/src/main/resources/application.properties中的数据库配置信息。
