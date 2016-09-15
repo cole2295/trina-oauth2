@@ -12,6 +12,7 @@
         <module>oauth2-server</module>
         <module>oauth2-mgr</module>
         <module>oauth2-client</module>
+        <module>oauth2-httpclient</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -19,7 +19,7 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserInfoService userInfoService;
-    @RequestMapping(value = "/me",method = RequestMethod.GET)
+    @RequestMapping(value = "/me")
     public @ResponseBody
     Map<String,String> userInfo(Principal user){
         UserInfo userInfo = userInfoService.findByUsername(user.getName());
