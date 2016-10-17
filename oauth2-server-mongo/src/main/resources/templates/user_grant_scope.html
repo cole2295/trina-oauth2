@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>授权登录</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>授权页面</h1>
+
+    <div th:if="${session.SPRING_SECURITY_LAST_EXCEPTION} != null" class="error">
+        <h2>Woops!</h2>
+        <p>
+            Access could not be granted. (<p th:text="${Session.SPRING_SECURITY_LAST_EXCEPTION.getMessage()}"></p>)
+        </p>
+    </div>
+    <h2>Please Confirm</h2>
+
+    <p>
+        You hereby authorize <span th:text="${client.clientId}"></span> to access your protected resources.
+    </p>
+
+    <form id="confirmationForm" name="confirmationForm"
+          th:action="@{/oauth/authorize}" method="post">
+        <input name="user_oauth_approval" value="true" type="hidden" />
+        <ul class="list-unstyled">
+            <div class="form-group" th:each="scope : ${scopes}">
+                <span th:text="${scope.key}"></span>: <input type="radio" th:name="${scope.key}"
+                               value="true" th:checked="${scope.value}">允许</input>
+                <input type="radio"
+                       th:name="${scope.key}" value="false" th:checked="${!scope.value}">拒绝</input>
+            </div>
+        </ul>
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}" />
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>
